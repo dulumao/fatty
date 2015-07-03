@@ -2,8 +2,3 @@
 
 /ThinkPHP/
 /.idea/
-
-#######protected#########
-
-!/ThinkPHP/Library/Think/Think.class.php
-!/ThinkPHP/Mode/common.php
