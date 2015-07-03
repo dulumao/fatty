@@ -115,7 +115,7 @@ class Think {
       }*/
 
       // 记录加载文件时间
-      //G('loadTime');
+      G('loadTime');
       // 运行应用
       //App::run();
     }

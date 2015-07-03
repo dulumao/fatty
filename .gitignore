@@ -1,4 +1,5 @@
 #########ignore##########
 
 /ThinkPHP/
+/Application/
 /.idea/
