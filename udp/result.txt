@@ -1,0 +1,66 @@
+send:
+number:1000
+error:0
+success:1000
+takes:2.5572776794434/1000000s
+rqs:391040835.35335 n/s
+receive:
+success:1000
+
+last:0%
+
+send:
+number:2000
+error:0
+success:2000
+takes:3.1816959381104/1000000s
+rqs:628595578.86849 n/s
+receive:
+success:1150
+
+last:42.5%
+
+send:
+number:1200
+error:0
+success:1200
+takes:3.3456087112427/1000000s
+rqs:358679123.46339 n/s
+receive:
+success:1148
+
+last:4.3333333333333%
+
+send:
+number:1100
+error:0
+success:1100
+takes:2.6525150645863/1000000s
+rqs:414700755.02533 n/s
+receive:
+success:1100
+
+last:0%
+
+send:
+number:1500
+error:0
+success:1500
+takes:2.534548441569/1000000s
+rqs:591821397.2156 n/s
+receive:
+success:1148
+
+last:23.466666666667%
+
+send:
+number:2000
+error:0
+success:2000
+takes:3.1106472015381/1000000s
+rqs:642953016.01901 n/s
+receive:
+success:1148
+
+last:42.6%
+
