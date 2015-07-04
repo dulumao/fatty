@@ -2,65 +2,76 @@ send:
 number:1000
 error:0
 success:1000
-takes:2.5572776794434/1000000s
-rqs:391040835.35335 n/s
+takes:3475.1892089844/1000000s
+rqs:287754.11635565 n/s
 receive:
 success:1000
-
 last:0%
 
-send:
-number:2000
-error:0
-success:2000
-takes:3.1816959381104/1000000s
-rqs:628595578.86849 n/s
-receive:
-success:1150
-
-last:42.5%
-
-send:
-number:1200
-error:0
-success:1200
-takes:3.3456087112427/1000000s
-rqs:358679123.46339 n/s
-receive:
-success:1148
-
-last:4.3333333333333%
 
 send:
 number:1100
 error:0
 success:1100
-takes:2.6525150645863/1000000s
-rqs:414700755.02533 n/s
+takes:3319.263458252/1000000s
+rqs:331398.82200833 n/s
 receive:
 success:1100
-
 last:0%
+
+
+send:
+number:1200
+error:0
+success:1200
+takes:5586.3857269287/1000000s
+rqs:214807.93820153 n/s
+receive:
+success:1150
+last:4.1666666666667%
+
+
+send:
+number:1300
+error:0
+success:1300
+takes:4036.4265441895/1000000s
+rqs:322067.0525694 n/s
+receive:
+success:1150
+last:11.538461538462%
+
+
+send:
+number:1400
+error:0
+success:1400
+takes:3374.3381500244/1000000s
+rqs:414896.17748887 n/s
+receive:
+success:1148
+last:18%
+
 
 send:
 number:1500
 error:0
 success:1500
-takes:2.534548441569/1000000s
-rqs:591821397.2156 n/s
+takes:3544.5690155029/1000000s
+rqs:423182.61922378 n/s
 receive:
-success:1148
+success:1149
+last:23.4%
 
-last:23.466666666667%
 
 send:
-number:2000
+number:1600
 error:0
-success:2000
-takes:3.1106472015381/1000000s
-rqs:642953016.01901 n/s
+success:1600
+takes:3640.89012146/1000000s
+rqs:439452.97622945 n/s
 receive:
 success:1148
+last:28.25%
 
-last:42.6%
 
