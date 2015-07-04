@@ -5,12 +5,12 @@
  * 向服务器中的log表中添加日志数据
  */
 
-if($argc!==3){
-    exit("php client.php 10 100\n");
+if($argc<3){
+    exit("php client.php 10 100 tag\n");
 }
-
+$tag = $argv[3] ? : "result";
 $sock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
-$data = ['log','data'=>'this is a log message'];
+$data = ['log','data'=>'a message'];
 $data = serialize($data);
 $len = strlen($data);
 $loop = $originLoop = $argv[1] ? : 10;
@@ -45,13 +45,14 @@ foreach($timeList as $k=>$numberList){
 echo "finally: ".(array_sum($loopTimeList)/$originLoop),"/{$secondUnit}s\n";
 
 
-sleep(10);
+$lockFile = 'receive-count.txt';
+sleep(120);
 $sendNumber = $total-$errorNumber;
 $result = "send:\nnumber:$total\n";
 $result .= "error:$errorNumber\nsuccess:$sendNumber\n";
 $result .= "takes:{$totalSecond}/{$secondUnit}s\n";
 $result .= "rqs:".($total/$totalSecond*$secondUnit)." n/s\n";
-$success = intval(file_get_contents('receive-count.txt'));
+$success = intval(file_get_contents($lockFile));
 $result .= "receive:\nsuccess:$success\n";
 $result .= "last:".(($sendNumber - $success)/$sendNumber*100)."%\n\n\n";
-file_put_contents('result.txt',$result,FILE_APPEND);
+file_put_contents("{$tag}.txt",$result,FILE_APPEND);

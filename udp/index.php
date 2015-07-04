@@ -72,6 +72,7 @@ for($i=0;$i<1000;++$i){
 Class UdpServerLog {
 
     public static $count = 0;
+    public static $lastUpdate = 0;
 
     const ERROR_PACK = 1;
     const ERROR_DATA = 2;
@@ -104,10 +105,15 @@ Class UdpServerLog {
 $server = new swoole_server('0.0.0.0', 9905, SWOOLE_PROCESS, SWOOLE_SOCK_UDP);
 $server->on('packet', function (swoole_server $serv, $data, $addr)
 {
+    if(time() - UdpServerLog::$lastUpdate > 10){
+        UdpServerLog::$count = 0;
+        echo "reset:----------------\n";
+    }
+    UdpServerLog::$lastUpdate = time();
     ++UdpServerLog::$count;
     file_put_contents('receive-count.txt',UdpServerLog::$count);
     //$serv->sendto($addr['address'], $addr['port'], "Swoole: $data");
-    /*if( null === ($data = unserialize($data)) ){
+    if( null === ($data = unserialize($data)) ){
         UdpServerLog::addError($addr['address'], $addr['port'],UdpServerLog::ERROR_PACK);
     }else{
         if(!is_array($data) || count($data) < 2){
@@ -119,6 +125,6 @@ $server->on('packet', function (swoole_server $serv, $data, $addr)
                 UdpServerLog::addError($addr['address'], $addr['port'],UdpServerLog::ERROR_DATA,$model->getError());
             }
         }
-    }*/
+    }
 });
 $server->start();
