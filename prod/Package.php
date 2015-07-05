@@ -105,7 +105,7 @@ class Package{
         if(!$con){
             socket_close($sock);
             $this->error[] = 'socket connect error';
-            return false;
+            return -1;
         }
         $this->bufferDriver->append(self::$packEof);
         $data = $this->bufferDriver->get();
