@@ -36,16 +36,18 @@ class SwooleServer{
 
     protected function dispatcherMessage(&$messages){
         //进一步优化是丢到task中处理
+        $success = 0;
         foreach($messages as $message){
             if(count($message)>2){
                 /*$driver = */array_shift($message);
                 $name = array_shift($message);
-                M($name)->add($message);
+                M($name)->add($message) && ++$success;
             }
         }
+        echo "success: {$success}\n";
     }
 
-    public function onReceive(swoole_server $server, $fd, $from_id, $message){
+    public function onReceive(\swoole_server $server, $fd, $from_id, $message){
         $oef = substr($message,-2);
         if($oef!=="\r\n"){
             $this->initFdBuffer($fd);
@@ -59,11 +61,14 @@ class SwooleServer{
             $result = Package::parsePackage($message);
             if($result['success']>0){
                 $this->dispatcherMessage($result['messages']);
+            }else if(!$result['ok']){
+                echo "parse error:\n";
+                print_r($result['error']);
             }
         }
     }
 
-    public function onClose(swoole_server $server, $fd,$from_id){
+    public function onClose(\swoole_server $server, $fd,$from_id){
         if(isset($this->fdBufferMap[$fd])){
             $this->fdBufferMap[$fd]->destroy();
             $this->fdBufferMap[$fd] = null;

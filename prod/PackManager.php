@@ -15,8 +15,8 @@ final class PackManager{
     const MSG_PACK = '1';
 
     protected static $objMap = [
-        self::MSG_PACK => 'MsgPack',
-        self::PHP_PACK => 'PhpPack'
+        self::MSG_PACK => 'fatty\\MsgPack',
+        self::PHP_PACK => 'fatty\\PhpPack'
     ];
 
     public static function getPack($id){
@@ -34,5 +34,9 @@ final class PackManager{
             }
         }
         return self::ERROR_PACK;
+    }
+
+    public static function hasId($id){
+        return isset(self::$objMap[$id]);
     }
 }

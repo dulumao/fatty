@@ -9,6 +9,7 @@
 require __DIR__.'/bootstrap.php';
 use \fatty\SwooleBuffer;
 use \fatty\PhpPack;
+use \fatty\MsgPack;
 use \fatty\Package;
 
 $bufferDriver = new SwooleBuffer();
@@ -16,7 +17,7 @@ $bufferDriver->init(10240);
 $packDriver = new PhpPack();
 $packageObject = new Package();
 $packageObject->init('127.0.0.1',9505,$bufferDriver,$packDriver);
-for($i=0;$i<10;$i++){
+for($i=0;$i<1000;$i++){
     $data = array(
         Package::DRIVER_MYSQL,
         'log',
@@ -25,4 +26,4 @@ for($i=0;$i<10;$i++){
     $packageObject->addPackage($data);
 }
 echo $packageObject->sendPackage(),"\n";
-print_r($packageObject->error);
+print_r($packageObject->hasError());

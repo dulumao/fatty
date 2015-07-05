@@ -16,4 +16,5 @@ return [
     'DB_PWD'                =>  '123456',
     'DB_PORT'               =>  '',
     'DB_PREFIX'             =>  'pre_',
+    'LOG_TYPE'              =>  'File'
 ];

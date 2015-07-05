@@ -13,18 +13,17 @@ namespace fatty;
 //发送的数据最后要加\r\n作为分包的依据
 class Package{
 
-    public $error = [];
-
     const DRIVER_MYSQL = '0';
     const DRIVER_MONGO = '1';
 
-    const PACK_EOF = "\r\n";
-    const PACK_EOF_LEN = 2;
+    public static $packEof = "\r\n";
+    public static $packEofLen = 2;
 
     protected $host;
     protected $port;
     protected $bufferDriver;
     protected $packDriver;
+    protected $error = [];
 
     public function init($host,$port,$bufferDriver,$packDriver){
         $this->host = $host;
@@ -48,7 +47,7 @@ class Package{
 
     public static function parsePackage(&$data){
         static $packDriverCache = [];
-        $maxLen = strlen($data) - self::PACK_EOF_LEN;
+        $maxLen = strlen($data) - self::$packEofLen;
         $point = $number = $success = 0;
         $messageList = $error = [];
         while($point<$maxLen){
@@ -61,7 +60,7 @@ class Package{
             }
             $packId = substr($data,$point,1);
             $point += 1;
-            if(strlen($packId)<1){
+            if(strlen($packId)<1 || !PackManager::hasId($packId)){
                 $error[] = 'pack id is error';
                 break;
             }
@@ -95,6 +94,7 @@ class Package{
             'ok' => ($number > 0 && $success == $number),
             'number' => $number,
             'success' => $success,
+            'error' => $error,
             'messages' => $messageList
         );
     }
@@ -107,9 +107,9 @@ class Package{
             $this->error[] = 'socket connect error';
             return false;
         }
-        $this->bufferDriver->append(self::PACK_EOF);
+        $this->bufferDriver->append(self::$packEof);
         $data = $this->bufferDriver->get();
-        if(($len = strlen($data))<=self::PACK_EOF_LEN){
+        if(($len = strlen($data))<=self::$packEofLen){
             $this->error[] = 'package is empty';
             return -1;
         }
@@ -122,5 +122,15 @@ class Package{
         }
         $this->bufferDriver->clear();
         return $writeLen;
+    }
+
+    public function hasError(){
+        if(count($this->error) > 0){
+            $tmp =  $this->error;
+            $this->error = [];
+            return $tmp;
+        }else{
+            return false;
+        }
     }
 }
