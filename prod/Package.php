@@ -13,8 +13,12 @@ namespace fatty;
 //发送的数据最后要加\r\n作为分包的依据
 class Package{
 
-    const DRIVER_MYSQL = '0';
-    const DRIVER_MONGO = '1';
+    const DRIVER_MYSQL 	= '0';
+    const DRIVER_MONGO 	= '1';
+	const DRIVER_ORACLE = '2';
+	const DRIVER_PGSQL	= '3';
+	const DRIVER_SQLITE = '4';
+	const DRIVER_SQLSRV = '5';
 
     public static $packEof = "\r\n";
     public static $packEofLen = 2;
