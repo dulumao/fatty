@@ -106,7 +106,7 @@
     );
 
 	$package = array(
-        Package::DRIVER_MONGO,		//驱动类型"MONGO
+        Package::DRIVER_MONGO,		//驱动类型：MONGO
         'log',				  		//集合名
         'data' => 'a log message',	//字段数据1
 		'data2' => 'a log message',	//字段数据2
@@ -148,4 +148,4 @@
 
 MessageQueue的麻烦之处在与Push方将数据存到Server中，Pop方并不会立即接收到通知，而只能使用poll的方式进行读取，白白浪费CPU时间。
 
-而使用Fatty，当Push数据过来时，便可立即对数据进行相应的处理。当客户端数量与数据量很大时，一个可以增加worker的数据，还可以将数据丢到task中进行处理。
+而使用Fatty，当Push数据过来时，便可立即对数据进行相应的处理。当客户端数量与数据量很大时，一个可以增加worker的数量，还可以将数据丢到task中进行处理。
