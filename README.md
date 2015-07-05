@@ -125,6 +125,19 @@
 	#启动服务器
 	php server.php
 
+# ThinkPHP
+
+fatty在对数据库进行封装的时候，并没有自己重复造轮子，而是直接将ThinkPHP这个框架改写成一个Library，框架额外占用的内存在400KB左右，启动时间增加0.02秒。
+
+完全通过注释的方式，减少不必要的加载与路由。注释了两个文件：
+
+1. Think.class.php
+2. Mode/common.php
+
+包装ThinkPHP的好处：一是类库丰富，二是方便项目进行扩展。
+
+选择ThinkPHP是因为：一是本地化最好，二是超轻量级的。
+
 # PHP VS MsgPack
 
 	根据client.php发送的数据
